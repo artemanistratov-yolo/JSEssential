@@ -18,3 +18,9 @@ function checkCountValue() {
         alert("You are really popular,congrats");
     }
 }
+
+function resetFollowers() {
+    count = 0;
+    document.getElementById('countDisplay').innerHTML=count;
+    alert("You just removed all followers, wow, amazing");
+}
