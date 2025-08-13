@@ -45,7 +45,7 @@ xhr.onload = function () {
       articlesDiv.appendChild(articleDiv);
     });
   } else {
-    console.error('Ошибка загрузки JSON:', xhr.status);
+    console.error('ERROR', xhr.status);
   }
 };
 
