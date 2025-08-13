@@ -2,16 +2,22 @@ var xhr = new XMLHttpRequest();
 var url = './health_article.json';
 xhr.open('GET', url, true);
 xhr.responseType = 'json';
-var articles = xhr.response.articles;
-var articlesDiv = document.getElementById('articles');
 
- articles.forEach(function(article) {
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    var articles = xhr.response.articles;
+    var articlesDiv = document.getElementById('articles');
+
+    articles.forEach(function(article) {
       var articleDiv = document.createElement('div');
       articleDiv.classList.add('article');
+
       var title = document.createElement('h2');
       title.textContent = article.title;
+
       var description = document.createElement('p');
       description.textContent = article.description;
+
       var waysHeader = document.createElement('h3');
       waysHeader.textContent = 'Ways to Achieve:';
       var waysList = document.createElement('ul');
@@ -20,6 +26,7 @@ var articlesDiv = document.getElementById('articles');
         listItem.textContent = way;
         waysList.appendChild(listItem);
       });
+
       var benefitsHeader = document.createElement('h3');
       benefitsHeader.textContent = 'Benefits:';
       var benefitsList = document.createElement('ul');
@@ -28,6 +35,7 @@ var articlesDiv = document.getElementById('articles');
         listItem.textContent = benefit;
         benefitsList.appendChild(listItem);
       });
+
       articleDiv.appendChild(title);
       articleDiv.appendChild(description);
       articleDiv.appendChild(waysHeader);
@@ -36,6 +44,9 @@ var articlesDiv = document.getElementById('articles');
       articleDiv.appendChild(benefitsList);
       articlesDiv.appendChild(articleDiv);
     });
+  } else {
+    console.error('Ошибка загрузки JSON:', xhr.status);
+  }
+};
 
 xhr.send();
-
